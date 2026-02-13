@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine | Elsa</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root { --white: #ffffff; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #ade8f4 0%, #48cae4 35%, #0096c7 70%, #023e8a 100%);
+  background-size: 150% 150%;
+  animation: waveBG 12s ease infinite;
+}
+
+/* --- ANIMASI PEMBUKA (LANDING) --- */
+#landing-page {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #023e8a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 1s ease, visibility 1s;
+}
+
+.envelope-wrapper {
+  cursor: pointer;
+  text-align: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.envelope-icon {
+  font-size: 80px;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.4));
+  margin-bottom: 20px;
+}
+
+#landing-page p {
+  color: white;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  padding: 0 20px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* --- EFEK VISUAL --- */
+.light-rays {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(95deg, transparent, rgba(255,255,255,0.05) 10%, transparent 20%);
+  mask-image: radial-gradient(circle at top, white, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at top, white, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  animation: raysMove 10s linear infinite;
+}
+
+@keyframes raysMove {
+  from { transform: translateX(-10%); }
+  to { transform: translateX(10%); }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 48, 73, 0.3) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particles-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes waveBG {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* --- ELEMEN DEKORATIF --- */
+.cloud-container { position: absolute; pointer-events: none; opacity: 0; }
+.cloud-img { height: auto; filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.3)); }
+
+.cloud-1 { top: 11%; left: 2%; animation: animEntryBottom 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
+.cloud-1 .cloud-img { width: 580px; }
+.cloud-2 { top: 7%; left: 0%; animation: animEntryLeft 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
+.cloud-2 .cloud-img { width: 180px; }
+.cloud-3 { top: 1%; left: 15%; animation: animEntryRight 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
+.cloud-3 .cloud-img { width: 500px; }
+
+@keyframes animEntryBottom { 0% { transform: translateY(20px); opacity: 0.75; } 100% { transform: translateY(0); opacity: 0.75; } }
+@keyframes animEntryLeft { 0% { transform: translateX(-20px); opacity: 0.75; } 100% { transform: translateX(0); opacity: 0.75; } }
+@keyframes animEntryRight { 0% { transform: translateX(20px); opacity: 0.75; } 100% { transform: translateX(0); opacity: 0.75; } }
+@keyframes cloudFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+.bird-container { position: absolute; z-index: 5; top: 5%; left: 7%; animation: birdFly 6s ease-in-out infinite; }
+.fish-container { position: absolute; z-index: 5; bottom: 10%; right: 2%; animation: fishSwim 8s ease-in-out infinite; }
+.bird-img { width: 350px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); }
+.fish-img { width: 350px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); }
+
+@keyframes birdFly { 0%, 100% { transform: translate(0, 0) rotate(-5deg); } 50% { transform: translate(30px, -20px) rotate(5deg); } }
+@keyframes fishSwim { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, -15px); } }
+
+.bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 4;
+  animation: bubbleUp 3s ease-in forwards;
+}
+
+@keyframes bubbleUp {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.7; }
+  100% { transform: translateY(-180px) scale(1.3); opacity: 0; }
+}
+
+.single-coral {
+  position: absolute;
+  bottom: -3%;
+  right: -1%;
+  z-index: 6;
+  pointer-events: none;
+  transform-origin: bottom center;
+  animation: coralSway 5s ease-in-out infinite;
+}
+.single-coral img { width: 250px; height: auto; }
+
+@keyframes coralSway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* --- KARTU UTAMA --- */
+.content-wrapper { 
+  position: relative; 
+  z-index: 10; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  width: 100%; 
+  height: 100%; 
+  padding: 20px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1s ease-out;
+}
+
+.content-wrapper.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  padding: 2.5rem 1.5rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+}
+
+.card:hover { transform: translateY(-5px) scale(1.02); background: rgba(255, 255, 255, 0.18); }
+
+h1 { 
+  font-family: 'Great Vibes', cursive; 
+  font-size: clamp(2.5rem, 8vw, 3.2rem); 
+  background: linear-gradient(to right, #fff 20%, #ade8f4 40%, #ade8f4 60%, #fff 80%);
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+  line-height: 1.2;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.title-underline {
+  width: 40%; height: 2px; background: rgba(255,255,255,0.6); margin: 5px auto 15px; border-radius: 2px; position: relative;
+}
+.title-underline::before, .title-underline::after {
+  content: '✦'; position: absolute; top: -8px; color: #fff; font-size: 0.7rem;
+}
+.title-underline::before { left: -15px; }
+.title-underline::after { right: -15px; }
+
+.tagline { color: #ffffff; font-size: clamp(0.85rem, 3.5vw, 1.1rem); margin-bottom: 25px; opacity: 0.95; font-weight: 300; letter-spacing: 0.5px; }
+
+/* --- BUTTONS --- */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-open, .btn-gift, .btn-next { 
+  padding: 12px 28px; 
+  background: white; 
+  color: #0077b6; 
+  border: none; 
+  border-radius: 50px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 220px;
+}
+.btn-open:hover, .btn-gift:not(:disabled):hover, .btn-next:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4); }
+
+.btn-gift:disabled {
+  background: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-next {
+    width: auto;
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    margin-top: 15px;
+    display: none; /* Muncul setelah teks selesai */
+}
+
+/* --- OVERLAY & BOXES --- */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 30, 45, 0.5);
+  display: none; align-items: center; justify-content: center;
+  backdrop-filter: blur(15px); z-index: 100;
+}
+.overlay.active { display: flex; }
+
+.letter-box, .gift-box-content {
+  background: white; padding: 40px 30px; border-radius: 25px;
+  width: 90%; max-width: 450px; text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  transform: scale(0.9); opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 8px double #caf0f8;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.overlay.active .letter-box, .overlay.active .gift-box-content { transform: scale(1); opacity: 1; }
+
+.letter-title { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #0077b6; margin-bottom: 5px; }
+.divider { width: 50px; height: 2px; background: #0077b6; margin: 0 auto 20px; opacity: 0.3; }
+.letter-text { color: #333; line-height: 1.7; font-size: 1rem; text-align: left; min-height: 100px; }
+.letter-footer { font-size: 0.8rem; color: #0077b6; margin-top: 20px; opacity: 0.6; font-style: italic; }
+
+.close-btn {
+  margin-top: 25px; display: inline-block;
+  background: #eef9ff; padding: 10px 25px; border-radius: 50px;
+  color: #0077b6; cursor: pointer; font-weight: 600;
+}
+
+/* --- GIFT ANIMATION --- */
+.gift-img-anim {
+  font-size: 60px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(5deg); }
+}
+
+.heart-particle {
+  position: absolute; pointer-events: none; z-index: 105;
+  animation: floatUpStraight 4s linear forwards;
+}
+@keyframes floatUpStraight {
+  0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+  100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+}
+
+.petal {
+  position: absolute; background-color: #fff; border-radius: 150% 0 150% 0;
+  opacity: 0.3; z-index: 3; pointer-events: none; animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; }
+  100% { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; }
+}
+
+@media screen and (max-width: 480px) { h1 { white-space: normal; } }
+</style>
+</head>
+
+<body>
+
+<div id="landing-page" onclick="startApp()">
+  <div class="envelope-wrapper">
+    <div class="envelope-icon">💌</div>
+    <p>Halo Elsavina Setia Dinanti, klik untuk membuka hadiahmu...</p>
+  </div>
+</div>
+
+<div class="light-rays"></div>
+<div class="particles-bg"></div>
+
+<div class="single-coral">
+  <img src="https://i.ibb.co.com/Ng01f4Dg/3a941c3c530201b42d02a71ce92ad159-removebg-preview.png" alt="Coral">
+</div>
+
+<div class="cloud-container cloud-1">
+  <img src="https://i.ibb.co.com/TD2bjYQk/awan-1.png" class="cloud-img" alt="Awan 1">
+</div>
+
+<div class="cloud-container cloud-2">
+  <img src="https://i.ibb.co.com/sdWy5Nff/awan-2.png" class="cloud-img" alt="Awan 2">
+</div>
+
+<div class="cloud-container cloud-3">
+  <img src="https://i.ibb.co.com/GQ8WP5Py/awan-3.png" class="cloud-img" alt="Awan 3">
+</div>
+
+<div class="bird-container"><img src="https://i.ibb.co.com/G4tG8Kyz/IMG-20260212-071048.png" class="bird-img"></div>
+<div id="fish" class="fish-container"><img src="https://i.ibb.co.com/60FpsZYF/ei-1770856664060-removebg-preview.png" class="fish-img"></div>
+
+<div class="content-wrapper" id="main-content">
+  <div class="card">
+    <div class="title-container">
+      <h1>Happy Valentine</h1>
+      <div class="title-underline"></div>
+    </div>
+    <p class="tagline">Walaupun jauh, hati tetap dekat 🤍</p>
+    
+    <div class="button-group">
+      <button class="btn-open" onclick="toggleLetter()">Pesan buatmu Elsa 💌</button>
+      <button class="btn-gift" id="gift-btn" disabled onclick="toggleGift()">Buka Hadiah Spesial 🎁</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="letter-box">
+      <div class="letter-title">Untuk Elsa</div>
+      <div class="divider"></div>
+      <div class="letter-text" id="typing-text"></div>
+      
+      <button id="btn-next-page" class="btn-next" onclick="nextPage()">Lanjut Baca... ✍️</button>
+      
+      <div id="letter-foot" class="letter-footer" style="display:none;">Forever & Always 🤍</div>
+      <div id="btn-close-letter" class="close-btn" style="display:none;" onclick="toggleLetter()">Tutup Pesan</div>
+    </div>
+  </div>
+
+  <div class="overlay" id="gift-overlay">
+    <div class="gift-box-content">
+      <div class="gift-img-anim">🎁✨</div>
+      <div class="letter-title">Hadiah Kecil</div>
+      <div class="divider"></div>
+      <p style="color: #333; line-height: 1.6;">Terima kasih sudah membaca pesanku sampai habis. <br><br> Hadiah sebenarnya bukanlah kodingan ini, tapi janji kalau aku akan selalu ada buat kamu. <br><br> <b>I Love You, Elsa!</b></p>
+      <div class="close-btn" onclick="toggleGift()">Peluk Jauh 🤗</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const pages = [
+    "Kita memang berada di dunia yang berbeda. Kamu di daratan, aku di lautan.\n\nTapi anehnya, setiap hari rasanya tetap pulang ke tempat yang sama. Ke kamu.\n\nHubungan ini bukan tentang jarak. Ini tentang dua orang yang sama-sama memilih untuk bertahan.\n\nAku cuma mau kita tetap tumbuh. Pelan, tapi pasti. Sampai nanti dunia kita benar-benar bertemu.",
+    "Dan kalau suatu hari langkah kita terasa berat, ingat saja alasan kenapa kita mulai. Bukan karena semuanya mudah, tapi karena kamu selalu terasa layak diperjuangkan.\n\nAku tidak butuh dunia yang sempurna, aku cuma butuh dunia yang ada kamu di dalamnya.\n\nJadi tetaplah di sini, berjalan bersamaku, sampai waktu sendiri yang membuktikan bahwa jarak tak pernah benar-benar memisahkan kita."
+];
+
+let currentPage = 0;
+let charIndex = 0;
+let heartInterval;
+
+function startApp() {
+  const landing = document.getElementById('landing-page');
+  const mainContent = document.getElementById('main-content');
+  landing.style.opacity = '0';
+  setTimeout(() => {
+    landing.style.visibility = 'hidden';
+    mainContent.classList.add('visible');
+  }, 1000);
+  setInterval(createPetal, 1500);
+  setInterval(createFishBubbles, 250);
+}
+
+function typeWriter() {
+  const textContainer = document.getElementById("typing-text");
+  const currentText = pages[currentPage];
+  
+  if (charIndex < currentText.length) {
+    let char = currentText.charAt(charIndex);
+    textContainer.innerHTML += char === "\n" ? "<br>" : char;
+    charIndex++;
+    setTimeout(typeWriter, 45);
+  } else {
+    // Selesai mengetik satu halaman
+    if (currentPage < pages.length - 1) {
+        document.getElementById("btn-next-page").style.display = "inline-block";
+    } else {
+        // Halaman terakhir selesai
+        document.getElementById("letter-foot").style.display = "block";
+        document.getElementById("btn-close-letter").style.display = "inline-block";
+        document.getElementById('gift-btn').disabled = false;
+    }
+  }
+}
+
+function nextPage() {
+    document.getElementById("btn-next-page").style.display = "none";
+    document.getElementById("typing-text").innerHTML = "";
+    currentPage++;
+    charIndex = 0;
+    typeWriter();
+}
+
+function toggleLetter() {
+  const overlay = document.getElementById('overlay');
+  overlay.classList.toggle('active');
+  
+  if (overlay.classList.contains('active')) {
+    // Reset ke halaman 1 saat dibuka
+    document.getElementById("typing-text").innerHTML = "";
+    document.getElementById("btn-next-page").style.display = "none";
+    document.getElementById("letter-foot").style.display = "none";
+    document.getElementById("btn-close-letter").style.display = "none";
+    currentPage = 0;
+    charIndex = 0;
+    typeWriter();
+    heartInterval = setInterval(createHeart, 200); 
+  } else {
+    clearInterval(heartInterval);
+    document.querySelectorAll('.heart-particle').forEach(h => h.remove());
+  }
+}
+
+function toggleGift() {
+  const giftOverlay = document.getElementById('gift-overlay');
+  giftOverlay.classList.toggle('active');
+  if (giftOverlay.classList.contains('active')) {
+     heartInterval = setInterval(createHeart, 200);
+  } else {
+     clearInterval(heartInterval);
+  }
+}
+
+// Fungsi tambahan (Petal, Bubble, Heart) sama seperti sebelumnya agar tidak rusak
+function createPetal() {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  const size = Math.random() * 10 + 10 + 'px';
+  petal.style.width = size;
+  petal.style.height = size;
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+  document.body.appendChild(petal);
+  setTimeout(() => petal.remove(), 10000);
+}
+
+function createFishBubbles() {
+  const fish = document.getElementById('fish');
+  if(!fish) return;
+  const fishRect = fish.getBoundingClientRect();
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.style.width = bubble.style.height = Math.random() * 12 + 5 + 'px';
+  bubble.style.left = (fishRect.left + (Math.random() * 150)) + 'px';
+  bubble.style.top = (fishRect.top + (Math.random() * 80)) + 'px';
+  document.body.appendChild(bubble);
+  setTimeout(() => bubble.remove(), 3000);
+}
+
+function createHeart() {
+  const overlays = document.querySelectorAll('.overlay.active');
+  if (overlays.length === 0) return;
+  const currentOverlay = overlays[overlays.length - 1];
+  const heart = document.createElement('span');
+  heart.innerHTML = '♥'; 
+  heart.classList.add('heart-particle');
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.color = ['#add8e6', '#ffffff', '#caf0f8'][Math.floor(Math.random() * 3)];
+  heart.style.fontSize = (Math.random() * 25 + 35) + 'px';
+  heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+  currentOverlay.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}
+</script>
+
+</body>
+</html>
