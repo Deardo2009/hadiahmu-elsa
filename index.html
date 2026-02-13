@@ -335,6 +335,13 @@ h1 {
 
 <body>
 
+<audio id="bg-music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+<audio id="type-sound">
+  <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+</audio>
+
 <div id="landing-page" onclick="startApp()">
   <div class="envelope-wrapper">
     <div class="envelope-icon">💌</div>
@@ -411,8 +418,14 @@ const pages = [
 let currentPage = 0;
 let charIndex = 0;
 let heartInterval;
+const bgMusic = document.getElementById('bg-music');
+const typeSound = document.getElementById('type-sound');
 
 function startApp() {
+  // Memutar musik saat klik pertama (menghindari blokir browser)
+  bgMusic.volume = 0.5;
+  bgMusic.play();
+
   const landing = document.getElementById('landing-page');
   const mainContent = document.getElementById('main-content');
   landing.style.opacity = '0';
@@ -431,6 +444,12 @@ function typeWriter() {
   if (charIndex < currentText.length) {
     let char = currentText.charAt(charIndex);
     textContainer.innerHTML += char === "\n" ? "<br>" : char;
+    
+    // Mainkan suara ketikan pelan
+    typeSound.currentTime = 0;
+    typeSound.volume = 0.1;
+    typeSound.play();
+
     charIndex++;
     setTimeout(typeWriter, 45);
   } else {
@@ -484,7 +503,6 @@ function toggleGift() {
   }
 }
 
-// Fungsi tambahan (Petal, Bubble, Heart) sama seperti sebelumnya agar tidak rusak
 function createPetal() {
   const petal = document.createElement('div');
   petal.className = 'petal';
