@@ -18,44 +18,76 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, #ade8f4 0%, #48cae4 35%, #0096c7 70%, #023e8a 100%);
-  background-size: 150% 150%;
-  animation: waveBG 12s ease infinite;
+  background: #000;
+}
+
+/* --- BACKGROUND ANIMASI SPLIT --- */
+.bg-split-container {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; z-index: 0;
+}
+
+.bg-sky {
+  width: 50%; height: 100%;
+  background: linear-gradient(135deg, #f5f3e0 0%, #eee8b0 10%, #9ddae6 40%, #3bb9d4 100%);
+  background-size: 300% 300%;
+  animation: gradientMove 10s ease infinite;
+  position: relative;
+}
+
+.sun-glow {
+  position: fixed;
+  top: -15%;
+  left: -15%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,248,200,0.2) 50%, transparent 70%);
+  z-index: 7;
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+.bg-sea {
+  width: 50%; height: 100%;
+  background: linear-gradient(-45deg, #003049, #0077b6, #00b4d8, #03045e);
+  background-size: 400% 400%;
+  animation: deepSeaMove 10s ease-in-out infinite;
+  position: relative;
+}
+
+.bg-sea::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.3));
+  pointer-events: none;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes deepSeaMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* --- ANIMASI PEMBUKA (LANDING) --- */
 #landing-page {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: #023e8a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 1s ease, visibility 1s;
+  background: #01214a;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 1000; transition: opacity 1s ease, visibility 1s;
 }
 
-.envelope-wrapper {
-  cursor: pointer;
-  text-align: center;
-  animation: float 3s ease-in-out infinite;
-}
-
-.envelope-icon {
-  font-size: 80px;
-  filter: drop-shadow(0 0 20px rgba(255,255,255,0.4));
-  margin-bottom: 20px;
-}
-
-#landing-page p {
-  color: white;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  padding: 0 20px;
-  text-align: center;
-  opacity: 0.8;
-}
+.envelope-wrapper { cursor: pointer; text-align: center; animation: float 3s ease-in-out infinite; }
+.envelope-icon { font-size: 80px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); margin-bottom: 20px; }
+#landing-page p { color: white; letter-spacing: 2px; font-size: 0.9rem; padding: 0 20px; text-align: center; opacity: 0.8; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -66,47 +98,30 @@ body {
 .light-rays {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: repeating-linear-gradient(95deg, transparent, rgba(255,255,255,0.05) 10%, transparent 20%);
-  mask-image: radial-gradient(circle at top, white, transparent 70%);
-  -webkit-mask-image: radial-gradient(circle at top, white, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-  animation: raysMove 10s linear infinite;
+  background: repeating-linear-gradient(95deg, transparent, rgba(255,255,255,0.03) 10%, transparent 20%);
+  mask-image: radial-gradient(circle at top left, white, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at top left, white, transparent 75%);
+  pointer-events: none; z-index: 3; animation: raysMove 10s linear infinite;
 }
 
-@keyframes raysMove {
-  from { transform: translateX(-10%); }
-  to { transform: translateX(10%); }
-}
+@keyframes raysMove { from { transform: translateX(-5%); } to { transform: translateX(5%); } }
 
 body::before {
-  content: '';
-  position: fixed;
+  content: ''; position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle, transparent 40%, rgba(0, 48, 73, 0.3) 100%);
-  pointer-events: none;
-  z-index: 2;
+  background: radial-gradient(circle at 20% 20%, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none; z-index: 2;
 }
 
 .particles-bg {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes waveBG {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 0%; }
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 60px 60px; pointer-events: none; z-index: 1;
 }
 
 /* --- ELEMEN DEKORATIF --- */
-.cloud-container { position: absolute; pointer-events: none; opacity: 0; }
-.cloud-img { height: auto; filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.3)); }
-
+.cloud-container { position: absolute; pointer-events: none; opacity: 0; z-index: 5; }
+.cloud-img { height: auto; filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.2)); }
 .cloud-1 { top: 11%; left: 2%; animation: animEntryBottom 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
 .cloud-1 .cloud-img { width: 580px; }
 .cloud-2 { top: 7%; left: 0%; animation: animEntryLeft 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
@@ -114,226 +129,168 @@ body::before {
 .cloud-3 { top: 1%; left: 15%; animation: animEntryRight 1s ease-out forwards, cloudFloat 5s ease-in-out 1s infinite; }
 .cloud-3 .cloud-img { width: 500px; }
 
-@keyframes animEntryBottom { 0% { transform: translateY(20px); opacity: 0.75; } 100% { transform: translateY(0); opacity: 0.75; } }
-@keyframes animEntryLeft { 0% { transform: translateX(-20px); opacity: 0.75; } 100% { transform: translateX(0); opacity: 0.75; } }
-@keyframes animEntryRight { 0% { transform: translateX(20px); opacity: 0.75; } 100% { transform: translateX(0); opacity: 0.75; } }
-@keyframes cloudFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes animEntryBottom { 0% { transform: translateY(20px); opacity: 0.6; } 100% { transform: translateY(0); opacity: 0.6; } }
+@keyframes animEntryLeft { 0% { transform: translateX(-20px); opacity: 0.6; } 100% { transform: translateX(0); opacity: 0.6; } }
+@keyframes animEntryRight { 0% { transform: translateX(20px); opacity: 0.6; } 100% { transform: translateX(0); opacity: 0.6; } }
+@keyframes cloudFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-.bird-container { position: absolute; z-index: 5; top: 5%; left: 7%; animation: birdFly 6s ease-in-out infinite; }
-.fish-container { position: absolute; z-index: 5; bottom: 10%; right: 2%; animation: fishSwim 8s ease-in-out infinite; }
-.bird-img { width: 350px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); }
-.fish-img { width: 350px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); }
+.bird-container { position: absolute; z-index: 6; top: 5%; left: 7%; animation: birdFly 6s ease-in-out infinite; }
+.fish-container { position: absolute; z-index: 6; bottom: 10%; right: 2%; animation: fishSwim 8s ease-in-out infinite; }
+.bird-img { width: 350px; height: auto; filter: drop-shadow(0 5px 15px rgba(255,255,255,0.2)); }
+.fish-img { width: 350px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); }
 
+.small-fish {
+  position: absolute; z-index: 4; width: 80px; height: auto; pointer-events: none; opacity: 0.7; animation: floatFish 4s ease-in-out infinite;
+}
+#small-fish-1 { top: 30%; right: 20%; }
+#small-fish-2 { top: 20%; right: 10%; transform: scaleX(-1); animation: floatFishLeft 4.5s ease-in-out infinite; }
+#small-fish-3 { top: 80%; right: 30%; }
+
+@keyframes floatFish { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(10px, -15px) rotate(2deg); } 66% { transform: translate(-5px, -5px) rotate(-1deg); } }
+@keyframes floatFishLeft { 0%, 100% { transform: scaleX(-1) translate(0, 0) rotate(0deg); } 33% { transform: scaleX(-1) translate(-10px, -15px) rotate(-2deg); } 66% { transform: scaleX(-1) translate(5px, -5px) rotate(1deg); } }
 @keyframes birdFly { 0%, 100% { transform: translate(0, 0) rotate(-5deg); } 50% { transform: translate(30px, -20px) rotate(5deg); } }
 @keyframes fishSwim { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, -15px); } }
 
 .bubble {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 4;
-  animation: bubbleUp 3s ease-in forwards;
+  position: absolute; background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%; pointer-events: none; z-index: 4; animation: bubbleUp 3s ease-in forwards;
 }
+@keyframes bubbleUp { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-180px) scale(1.3); opacity: 0; } }
 
-@keyframes bubbleUp {
-  0% { transform: translateY(0) scale(0.5); opacity: 0; }
-  20% { opacity: 0.7; }
-  100% { transform: translateY(-180px) scale(1.3); opacity: 0; }
-}
+.single-coral { position: absolute; bottom: -3%; right: -1%; z-index: 6; pointer-events: none; transform-origin: bottom center; animation: coralSway 5s ease-in-out infinite; }
+.single-coral img { width: 250px; height: auto; filter: brightness(0.8); }
+@keyframes coralSway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
-.single-coral {
-  position: absolute;
-  bottom: -3%;
-  right: -1%;
-  z-index: 6;
-  pointer-events: none;
-  transform-origin: bottom center;
-  animation: coralSway 5s ease-in-out infinite;
-}
-.single-coral img { width: 250px; height: auto; }
-
-@keyframes coralSway {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-}
-
-/* --- KARTU UTAMA --- */
+/* --- KOTAK UTAMA --- */
 .content-wrapper { 
-  position: relative; 
-  z-index: 10; 
-  display: flex; 
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  width: 100%; 
-  height: 100%; 
-  padding: 20px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 1s ease-out;
+  position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; opacity: 0; transform: scale(0.8); transition: all 1s ease-out;
 }
-
-.content-wrapper.visible {
-  opacity: 1;
-  transform: scale(1);
-}
+.content-wrapper.visible { opacity: 1; transform: scale(1); }
 
 .card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  padding: 2.5rem 1.5rem;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.2);
-  text-align: center;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  width: 100%;
-  max-width: 450px;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3.5rem 2rem; border-radius: 35px; border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 100%; max-width: 520px; 
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  text-align: center; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;
 }
-
-.card:hover { transform: translateY(-5px) scale(1.02); background: rgba(255, 255, 255, 0.18); }
+.card:hover { transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 0 60px rgba(0, 180, 216, 0.4); }
 
 h1 { 
-  font-family: 'Great Vibes', cursive; 
-  font-size: clamp(2.5rem, 8vw, 3.2rem); 
+  font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 3.2rem); 
   background: linear-gradient(to right, #fff 20%, #ade8f4 40%, #ade8f4 60%, #fff 80%);
-  background-size: 200% auto;
-  color: #fff;
-  background-clip: text;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-  line-height: 1.2;
+  background-size: 200% auto; color: #fff; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite; line-height: 1.2;
 }
+@keyframes shine { to { background-position: 200% center; } }
 
-@keyframes shine {
-  to { background-position: 200% center; }
-}
+.title-underline { width: 40%; height: 2px; background: rgba(255,255,255,0.4); margin: 5px auto 15px; border-radius: 2px; position: relative; }
+.title-underline::before, .title-underline::after { content: '✦'; position: absolute; top: -8px; color: #fff; font-size: 0.7rem; }
+.title-underline::before { left: -15px; } .title-underline::after { right: -15px; }
 
-.title-underline {
-  width: 40%; height: 2px; background: rgba(255,255,255,0.6); margin: 5px auto 15px; border-radius: 2px; position: relative;
-}
-.title-underline::before, .title-underline::after {
-  content: '✦'; position: absolute; top: -8px; color: #fff; font-size: 0.7rem;
-}
-.title-underline::before { left: -15px; }
-.title-underline::after { right: -15px; }
+.tagline { color: #ffffff; font-size: clamp(0.85rem, 3.5vw, 1.1rem); margin-bottom: 25px; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-.tagline { color: #ffffff; font-size: clamp(0.85rem, 3.5vw, 1.1rem); margin-bottom: 25px; opacity: 0.95; font-weight: 300; letter-spacing: 0.5px; }
-
-/* --- BUTTONS --- */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
+.button-group { display: flex; flex-direction: column; gap: 15px; align-items: center; }
 .btn-open, .btn-gift, .btn-next { 
-  padding: 12px 28px; 
-  background: white; 
-  color: #0077b6; 
-  border: none; 
-  border-radius: 50px; 
-  font-weight: 700; 
-  cursor: pointer; 
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  width: 220px;
+  padding: 14px 30px; background: white; color: #004d73; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.4s; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); width: 240px;
 }
-.btn-open:hover, .btn-gift:not(:disabled):hover, .btn-next:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4); }
-
-.btn-gift:disabled {
-  background: rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.5);
-  cursor: not-allowed;
-  box-shadow: none;
-}
+.btn-open:hover, .btn-gift:not(:disabled):hover, .btn-next:hover { transform: scale(1.05); background-color: #f0faff; }
+.btn-gift:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); cursor: not-allowed; }
 
 .btn-next {
-    width: auto;
-    font-size: 0.9rem;
-    padding: 8px 20px;
-    margin-top: 15px;
-    display: none; /* Muncul setelah teks selesai */
+  margin-top: 25px;
 }
 
-/* --- OVERLAY & BOXES --- */
+/* --- OVERLAY & PESAN (ESTETIKA BARU) --- */
 .overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 30, 45, 0.5);
-  display: none; align-items: center; justify-content: center;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); display: none; align-items: center; justify-content: center;
   backdrop-filter: blur(15px); z-index: 100;
 }
 .overlay.active { display: flex; }
 
 .letter-box, .gift-box-content {
-  background: white; padding: 40px 30px; border-radius: 25px;
+  background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%); 
+  padding: 45px 35px; border-radius: 25px;
   width: 90%; max-width: 450px; text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-  transform: scale(0.9); opacity: 0;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 8px double #caf0f8;
-  position: relative;
-  max-height: 80vh;
-  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 150, 199, 0.4), inset 0 0 0 10px rgba(255,255,255,0.5);
+  border: 1px solid rgba(0, 86, 130, 0.1); position: relative;
+  max-height: 80vh; overflow-y: auto;
+  opacity: 0; transform: scale(0.5) translateY(100px);
 }
 
-.overlay.active .letter-box, .overlay.active .gift-box-content { transform: scale(1); opacity: 1; }
-
-.letter-title { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #0077b6; margin-bottom: 5px; }
-.divider { width: 50px; height: 2px; background: #0077b6; margin: 0 auto 20px; opacity: 0.3; }
-.letter-text { color: #333; line-height: 1.7; font-size: 1rem; text-align: left; min-height: 100px; }
-.letter-footer { font-size: 0.8rem; color: #0077b6; margin-top: 20px; opacity: 0.6; font-style: italic; }
-
-.close-btn {
-  margin-top: 25px; display: inline-block;
-  background: #eef9ff; padding: 10px 25px; border-radius: 50px;
-  color: #0077b6; cursor: pointer; font-weight: 600;
+/* Garis Margin Estetik */
+.letter-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 30px;
+  width: 2px; height: 100%;
+  background: rgba(0, 86, 130, 0.1);
+  z-index: 1;
 }
 
-/* --- GIFT ANIMATION --- */
-.gift-img-anim {
-  font-size: 60px;
-  margin-bottom: 15px;
-  animation: bounce 2s infinite;
+/* Garis Border Dalam Tipis */
+.letter-box::after {
+  content: '';
+  position: absolute;
+  top: 15px; left: 15px; right: 15px; bottom: 15px;
+  border: 1px solid rgba(0, 86, 130, 0.05);
+  border-radius: 15px;
+  pointer-events: none;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2) rotate(5deg); }
+.overlay.active .letter-box, 
+.overlay.active .gift-box-content { 
+  animation: letterEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.heart-particle {
-  position: absolute; pointer-events: none; z-index: 105;
-  animation: floatUpStraight 4s linear forwards;
-}
-@keyframes floatUpStraight {
-  0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
-  100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+@keyframes letterEntrance {
+  0% { transform: scale(0.5) translateY(100px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.petal {
-  position: absolute; background-color: #fff; border-radius: 150% 0 150% 0;
-  opacity: 0.3; z-index: 3; pointer-events: none; animation: petalFall linear infinite;
+.letter-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #005682; position: relative; z-index: 2; }
+.divider { width: 70%; height: 1px; background: linear-gradient(to right, transparent, #005682, transparent); margin: 10px auto 25px; opacity: 0.3; position: relative; z-index: 2; }
+.letter-text { color: #1a3c4a; line-height: 1.8; font-size: 1.05rem; text-align: justify; min-height: 100px; position: relative; z-index: 2; padding-left: 15px; }
+.close-btn { margin-top: 25px; display: inline-block; background: #005682; padding: 10px 25px; border-radius: 50px; color: #fff; cursor: pointer; font-weight: 600; transition: 0.3s; position: relative; z-index: 3; }
+.close-btn:hover { background: #013a5a; transform: scale(1.05); }
+
+.heart-particle { position: absolute; pointer-events: none; z-index: 90; animation: floatUpStraight 4s linear forwards; }
+@keyframes floatUpStraight { 0% { transform: translateY(110vh) scale(0.5); opacity: 0; } 100% { transform: translateY(-20vh) scale(1.5); opacity: 0; } }
+
+.petal { position: absolute; background-color: #fff; border-radius: 150% 0 150% 0; opacity: 0.2; z-index: 3; pointer-events: none; animation: petalFall linear infinite; }
+@keyframes petalFall { 0% { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; } 100% { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; } }
+
+/* --- ANIMASI HATI PUTIH TERBANG RAMAI (DI BELAKANG) --- */
+.flying-heart {
+  position: fixed;
+  bottom: -100px;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: 90; /* Pindah ke belakang kartu pesan (z-index kartu 100) */
+  animation: flyUp linear forwards;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
 }
 
-@keyframes petalFall {
-  0% { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; }
-  100% { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; }
+@keyframes flyUp {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-120vh) rotate(360deg) scale(1.5); opacity: 0; }
 }
 
-@media screen and (max-width: 480px) { h1 { white-space: normal; } }
+@media screen and (max-width: 480px) { .card { padding: 2rem 1.5rem; } .letter-box { padding: 35px 25px; } .letter-box::before { left: 20px; } }
 </style>
 </head>
 
 <body>
+
+<div class="sun-glow"></div>
+
+<div class="bg-split-container">
+  <div class="bg-sky"></div>
+  <div class="bg-sea"></div>
+</div>
 
 <audio id="bg-music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
@@ -356,29 +313,22 @@ h1 {
   <img src="https://i.ibb.co.com/Ng01f4Dg/3a941c3c530201b42d02a71ce92ad159-removebg-preview.png" alt="Coral">
 </div>
 
-<div class="cloud-container cloud-1">
-  <img src="https://i.ibb.co.com/TD2bjYQk/awan-1.png" class="cloud-img" alt="Awan 1">
-</div>
-
-<div class="cloud-container cloud-2">
-  <img src="https://i.ibb.co.com/sdWy5Nff/awan-2.png" class="cloud-img" alt="Awan 2">
-</div>
-
-<div class="cloud-container cloud-3">
-  <img src="https://i.ibb.co.com/GQ8WP5Py/awan-3.png" class="cloud-img" alt="Awan 3">
-</div>
+<div class="cloud-container cloud-1"><img src="https://i.ibb.co.com/TD2bjYQk/awan-1.png" class="cloud-img"></div>
+<div class="cloud-container cloud-2"><img src="https://i.ibb.co.com/sdWy5Nff/awan-2.png" class="cloud-img"></div>
+<div class="cloud-container cloud-3"><img src="https://i.ibb.co.com/GQ8WP5Py/awan-3.png" class="cloud-img"></div>
 
 <div class="bird-container"><img src="https://i.ibb.co.com/G4tG8Kyz/IMG-20260212-071048.png" class="bird-img"></div>
 <div id="fish" class="fish-container"><img src="https://i.ibb.co.com/60FpsZYF/ei-1770856664060-removebg-preview.png" class="fish-img"></div>
 
+<img id="small-fish-1" class="small-fish" src="https://i.ibb.co.com/mrM3jNQp/ei-1770958006372-removebg-preview.png">
+<img id="small-fish-2" class="small-fish" src="https://i.ibb.co.com/rRYX9vzr/ei-1770958075588-removebg-preview.png">
+<img id="small-fish-3" class="small-fish" src="https://i.ibb.co.com/mrM3jNQp/ei-1770958006372-removebg-preview.png">
+
 <div class="content-wrapper" id="main-content">
   <div class="card">
-    <div class="title-container">
-      <h1>Happy Valentine</h1>
-      <div class="title-underline"></div>
-    </div>
+    <h1>Happy Valentine</h1>
+    <div class="title-underline"></div>
     <p class="tagline">Walaupun jauh, hati tetap dekat 🤍</p>
-    
     <div class="button-group">
       <button class="btn-open" onclick="toggleLetter()">Pesan buatmu Elsa 💌</button>
       <button class="btn-gift" id="gift-btn" disabled onclick="toggleGift()">Buka Hadiah Spesial 🎁</button>
@@ -390,20 +340,29 @@ h1 {
       <div class="letter-title">Untuk Elsa</div>
       <div class="divider"></div>
       <div class="letter-text" id="typing-text"></div>
-      
-      <button id="btn-next-page" class="btn-next" onclick="nextPage()">Lanjut Baca... ✍️</button>
-      
-      <div id="letter-foot" class="letter-footer" style="display:none;">Forever & Always 🤍</div>
+      <button id="btn-next-page" class="btn-next" style="display:none;" onclick="nextPage()">Lanjut Baca... ✍️</button>
+      <div id="letter-foot" style="display:none; color:#0077b6; margin-top:20px; font-style:italic; position:relative; z-index:2;">Forever & Always 🤍</div>
       <div id="btn-close-letter" class="close-btn" style="display:none;" onclick="toggleLetter()">Tutup Pesan</div>
     </div>
   </div>
 
   <div class="overlay" id="gift-overlay">
     <div class="gift-box-content">
-      <div class="gift-img-anim">🎁✨</div>
+      <div style="font-size:60px; animation: bounce 2s infinite;">🎁✨</div>
       <div class="letter-title">Hadiah Kecil</div>
       <div class="divider"></div>
-      <p style="color: #333; line-height: 1.6;">Terima kasih sudah membaca pesanku sampai habis. <br><br> Hadiah sebenarnya bukanlah kodingan ini, tapi janji kalau aku akan selalu ada buat kamu. <br><br> <b>I Love You, Elsa!</b></p>
+      <p style="color: #333; line-height: 1.6; position:relative; z-index:2; margin-bottom: 20px;">
+        Terima kasih sudah membaca pesanku sampai habis. <br>
+        Kamu berhak mendapatkan sesuatu!
+      </p>
+
+      <a href="https://wa.me/6282275119803?text=sayanggg%20aku%20mau%20minta%20hadiahhh" target="_blank" style="text-decoration: none; display: inline-block;">
+        <button class="btn-open" style="background: #25D366; color: white; width: auto; padding: 15px 40px; margin-bottom: 10px;">
+          Klik untuk Klaim Hadiah 🎁
+        </button>
+      </a>
+
+      <p style="color: #666; font-size: 0.8rem; margin-bottom: 20px;"><b>I Love You, Elsa!</b></p>
       <div class="close-btn" onclick="toggleGift()">Peluk Jauh 🤗</div>
     </div>
   </div>
@@ -412,26 +371,29 @@ h1 {
 <script>
 const pages = [
     "Kita memang berada di dunia yang berbeda. Kamu di daratan, aku di lautan.\n\nTapi anehnya, setiap hari rasanya tetap pulang ke tempat yang sama. Ke kamu.\n\nHubungan ini bukan tentang jarak. Ini tentang dua orang yang sama-sama memilih untuk bertahan.\n\nAku cuma mau kita tetap tumbuh. Pelan, tapi pasti. Sampai nanti dunia kita benar-benar bertemu.",
-    "Dan kalau suatu hari langkah kita terasa berat, ingat saja alasan kenapa kita mulai. Bukan karena semuanya mudah, tapi karena kamu selalu terasa layak diperjuangkan.\n\nAku tidak butuh dunia yang sempurna, aku cuma butuh dunia yang ada kamu di dalamnya.\n\nJadi tetaplah di sini, berjalan bersamaku, sampai waktu sendiri yang membuktikan bahwa jarak tak pernah benar-benar memisahkan kita."
+
+    "Dan kalau suatu hari langkah kita terasa berat, ingat saja alasan kenapa kita mulai. Bukan karena semuanya mudah, tapi karena kamu selalu terasa layak diperjuangkan.\n\nAku tidak butuh dunia yang sempurna, aku cuma butuh dunia yang ada kamu di dalamnya.\n\nJadi tetaplah di sini, berjalan bersamaku, sampai waktu sendiri yang membuktikan bahwa jarak tak pernah benar-benar memisahkan kita.",
+    
+    "Seumur hidupku, Valentine selalu datang seperti tamu yang salah alamat. Ia lewat begitu saja, tanpa pernah mengetuk pintu untukku. Tak pernah ada cokelat yang singgah di tanganku, tak pernah ada pita yang menyebut namaku.\n\nDulu rasanya perih. Sekarang rasanya kosong. Seperti sudah terbiasa menunggu sesuatu yang tidak pernah benar-benar ada.\n\nKadang aku melihat orang lain menerima cokelat dengan senyum penuh arti. Aku hanya berdiri jauh, memperhatikan mereka dari sisi yang tak terlihat, sambil membakar magnum yang selalu menemani hari-hariku.",
+    
+    "Lama-lama aku berhenti berharap. Bukan karena dunia kejam, tapi karena aku sadar aku tidak pantas mendapatkannya. Ada orang-orang yang ditakdirkan menerima, dan ada aku yang ditakdirkan hanya melihat dari jauh.\n\nJadi kalau hari ini kamu ingin memberiku hadiah, tolong simpan saja. Bukan karena aku tidak mau. Justru karena aku takut merasakan sebentar rasanya dianggap berharga, lalu harus kembali sadar bahwa aku sebenarnya biasa saja. Aku takut perasaan hangat itu hilang, dan dinginnya terasa dua kali lipat.",
+    
+    "Aku tidak pernah benar-benar butuh cokelat atau bunga. Aku cuma butuh satu hal yang tidak pernah bisa dibungkus kertas kado. Kamu tetap di sini.\n\nKarena bagiku, kehadiranmu itu seperti cahaya kecil di ruangan gelap. Tidak mengubah segalanya, tapi cukup supaya aku tidak sepenuhnya tenggelam.\n\nBiarkan Valentine tetap seperti tahun-tahun sebelumnya. Sunyi. Tanpa hadiah. Tanpa cokelat. Bedanya cuma satu.\n\nKali ini, aku tidak sepenuhnya sendirian. Karena setidaknya masih ada kamu."
 ];
 
 let currentPage = 0;
 let charIndex = 0;
 let heartInterval;
+let flyingHeartInterval; 
 const bgMusic = document.getElementById('bg-music');
 const typeSound = document.getElementById('type-sound');
 
 function startApp() {
-  // Memutar musik saat klik pertama (menghindari blokir browser)
-  bgMusic.volume = 0.5;
-  bgMusic.play();
-
-  const landing = document.getElementById('landing-page');
-  const mainContent = document.getElementById('main-content');
-  landing.style.opacity = '0';
+  bgMusic.volume = 0.5; bgMusic.play();
+  document.getElementById('landing-page').style.opacity = '0';
   setTimeout(() => {
-    landing.style.visibility = 'hidden';
-    mainContent.classList.add('visible');
+    document.getElementById('landing-page').style.visibility = 'hidden';
+    document.getElementById('main-content').classList.add('visible');
   }, 1000);
   setInterval(createPetal, 1500);
   setInterval(createFishBubbles, 250);
@@ -440,24 +402,16 @@ function startApp() {
 function typeWriter() {
   const textContainer = document.getElementById("typing-text");
   const currentText = pages[currentPage];
-  
   if (charIndex < currentText.length) {
     let char = currentText.charAt(charIndex);
     textContainer.innerHTML += char === "\n" ? "<br>" : char;
-    
-    // Mainkan suara ketikan pelan
-    typeSound.currentTime = 0;
-    typeSound.volume = 0.1;
-    typeSound.play();
-
+    typeSound.currentTime = 0; typeSound.volume = 0.1; typeSound.play();
     charIndex++;
     setTimeout(typeWriter, 45);
   } else {
-    // Selesai mengetik satu halaman
     if (currentPage < pages.length - 1) {
         document.getElementById("btn-next-page").style.display = "inline-block";
     } else {
-        // Halaman terakhir selesai
         document.getElementById("letter-foot").style.display = "block";
         document.getElementById("btn-close-letter").style.display = "inline-block";
         document.getElementById('gift-btn').disabled = false;
@@ -468,9 +422,18 @@ function typeWriter() {
 function nextPage() {
     document.getElementById("btn-next-page").style.display = "none";
     document.getElementById("typing-text").innerHTML = "";
-    currentPage++;
-    charIndex = 0;
-    typeWriter();
+    currentPage++; charIndex = 0; typeWriter();
+}
+
+function createFlyingHeart() {
+  const heart = document.createElement('div');
+  heart.innerHTML = '🤍';
+  heart.className = 'flying-heart';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = (Math.random() * 30 + 40) + 'px';
+  heart.style.animationDuration = (Math.random() * 3 + 5) + 's'; 
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
 }
 
 function toggleLetter() {
@@ -478,18 +441,18 @@ function toggleLetter() {
   overlay.classList.toggle('active');
   
   if (overlay.classList.contains('active')) {
-    // Reset ke halaman 1 saat dibuka
+    flyingHeartInterval = setInterval(createFlyingHeart, 800);
+    for(let i=0; i<15; i++) setTimeout(createHeart, i * 50);
     document.getElementById("typing-text").innerHTML = "";
     document.getElementById("btn-next-page").style.display = "none";
     document.getElementById("letter-foot").style.display = "none";
     document.getElementById("btn-close-letter").style.display = "none";
-    currentPage = 0;
-    charIndex = 0;
-    typeWriter();
-    heartInterval = setInterval(createHeart, 200); 
+    currentPage = 0; charIndex = 0;
+    setTimeout(typeWriter, 800); 
+    heartInterval = setInterval(createHeart, 300); 
   } else {
     clearInterval(heartInterval);
-    document.querySelectorAll('.heart-particle').forEach(h => h.remove());
+    clearInterval(flyingHeartInterval);
   }
 }
 
@@ -497,9 +460,12 @@ function toggleGift() {
   const giftOverlay = document.getElementById('gift-overlay');
   giftOverlay.classList.toggle('active');
   if (giftOverlay.classList.contains('active')) {
-     heartInterval = setInterval(createHeart, 200);
+     flyingHeartInterval = setInterval(createFlyingHeart, 200);
+     for(let i=0; i<15; i++) setTimeout(createHeart, i * 50);
+     heartInterval = setInterval(createHeart, 300);
   } else {
      clearInterval(heartInterval);
+     clearInterval(flyingHeartInterval);
   }
 }
 
@@ -507,8 +473,7 @@ function createPetal() {
   const petal = document.createElement('div');
   petal.className = 'petal';
   const size = Math.random() * 10 + 10 + 'px';
-  petal.style.width = size;
-  petal.style.height = size;
+  petal.style.width = size; petal.style.height = size;
   petal.style.left = Math.random() * 100 + 'vw';
   petal.style.animationDuration = Math.random() * 5 + 5 + 's';
   document.body.appendChild(petal);
@@ -529,17 +494,13 @@ function createFishBubbles() {
 }
 
 function createHeart() {
-  const overlays = document.querySelectorAll('.overlay.active');
-  if (overlays.length === 0) return;
-  const currentOverlay = overlays[overlays.length - 1];
   const heart = document.createElement('span');
   heart.innerHTML = '♥'; 
   heart.classList.add('heart-particle');
   heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.color = ['#add8e6', '#ffffff', '#caf0f8'][Math.floor(Math.random() * 3)];
+  heart.style.color = ['#ade8f4', '#ffffff', '#caf0f8'][Math.floor(Math.random() * 3)];
   heart.style.fontSize = (Math.random() * 25 + 35) + 'px';
-  heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-  currentOverlay.appendChild(heart);
+  document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 4000);
 }
 </script>
